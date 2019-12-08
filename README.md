@@ -3,6 +3,8 @@ Class is used to get business-oriented information (reports) over tech-oriented 
 
 Only events stored in database are supported, no realtime mode.
 
+Tested on FreePBX 14.0.5.25 (Asterisk 13.19.1).
+
 See cel.php and classes files for examples.
 
 ## Asterisk channels and calls
@@ -61,3 +63,4 @@ echo $call->getTimeBeforeHumanAnswer();
 // returns true if the call was inside work hours schedule. See week-based schedule inside MPA_CEL_Call class:
 
 var_dump($call->isWorkTime());
+```
