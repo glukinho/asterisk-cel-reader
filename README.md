@@ -26,13 +26,20 @@ $call = new MPA_CEL_Class($linkedid, $db_options)
 $call->load();  // Loads CEL events from database.
 
 // You can filter events collection:
+
 $call->getEvents()->filter('eventtype', 'BRIDGE_ENTER');   // returns collection of BRIDGE_ENTER events
+
 
 // You can pipe several filters to apply them in a row (this is killer feature :)
 // This will return collection of events with eventtype = BRIDGE_ENTER and channame begins from 'SIP/':
-$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->filter('channame', 'SIP/', 'begins');
+
+$call->getEvents()
+  ->filter('eventtype', 'BRIDGE_ENTER')
+  ->filter('channame', 'SIP/', 'begins');
+
 
 // Get last BRIDGE_ENTER event:
+
 $call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->last();
 ```
 
@@ -47,7 +54,10 @@ Examples:
 // (technically, this is number of seconds from first event 
 // to the first BRIDGE_ENTER event, or LINKEDID_END event, 
 // if none BRIDGE_ENTER found):
+
 echo $call->getTimeBeforeHumanAnswer();
 
+
 // returns true if the call was inside work hours schedule. See week-based schedule inside MPA_CEL_Call class:
+
 var_dump($call->isWorkTime());
