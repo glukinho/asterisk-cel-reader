@@ -1,5 +1,8 @@
 <?php
 
+// execute like this:
+// php cel.php | tee calls-info.csv
+
 include 'classes/CEL_Call.php';
 include 'classes/CEL_Event.php';
 include 'classes/CEL_Events_Collection.php';
@@ -13,8 +16,10 @@ $db_options = array(
 	'charset' => 'utf8'
 );
 
-
-$calls_arr = file('calls-sep.txt', FILE_IGNORE_NEW_LINES);
+// prepare calls.txt file with linkedids
+// for example, using SQL:
+// select linkedid from cel where eventtime >= '2019-09-01 00:00:00' and eventtype='LINKEDID_END' into outfile 'calls.txt';
+$calls_arr = file('calls.txt', FILE_IGNORE_NEW_LINES);
 
 $fields = [
 	'linkedid',
@@ -34,9 +39,14 @@ echo implode(',', $fields) . PHP_EOL;
 
 
 foreach ($calls_arr as $linkedid) {
-	// echo $linkedid . PHP_EOL;
 	
+	
+	// you can extend CEL_Call or MPA_CEL_Call classes with your own business logic 
+	// (for example, you can check call direction based on DID length or work time with your own schedule)
+	// MPA_CEL_Call is just one of many possible logic implementations, special for each PBX installation
 	$call = new MPA_CEL_Call($linkedid, $db_options);
+	
+	// loads CEL events of given linkedid from DB
 	$call->load();
 	
 	$csv = [
