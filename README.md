@@ -43,6 +43,11 @@ $call->getEvents()
 // Get last BRIDGE_ENTER event:
 
 $call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->last();
+
+
+// Get value of 'exten' field of the first CHAN_START event:
+
+$call->getEvents()->filter('eventtype', 'CHAN_START')->first()->get('exten');
 ```
 
 See methods of CEL_Events_Collection class to see how events can be manipulated.
