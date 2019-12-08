@@ -24,19 +24,17 @@ $linkedid = '1234567890.123456';
   
 $call = new MPA_CEL_Class($linkedid, $db_options)
 $call->load();  // Loads CEL events from database.
+
+// You can filter events collection:
+$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER');   // returns collection of BRIDGE_ENTER events
+
+// You can pipe several filters to apply them in a row (this is killer feature :)
+// This will return collection of events with eventtype = BRIDGE_ENTER and channame begins from 'SIP/':
+$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->filter('channame', 'SIP/', 'begins');
+
+// Get last BRIDGE_ENTER event:
+$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->last();
 ```
-
-You can filter events collection:
-
-`$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER');   // returns collection of BRIDGE_ENTER events`
-
-You can pipe several filters to apply them in a row (this is killer feature :)
-
-`$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->filter('channame', 'SIP/', 'begins');`
-
-Get last BRIDGE_ENTER event:
-
-`$call->getEvents()->filter('eventtype', 'BRIDGE_ENTER')->last();`
 
 See methods of CEL_Events_Collection class to see how events can be manipulated.
 
@@ -44,9 +42,12 @@ See methods of CEL_Events_Collection class to see how events can be manipulated.
 MPA_CEL_Call (extends CEL_Call) class is a particular adaptation to some PBX I needed to have reports from. It implements some business logic (work time, direction of a call, etc) that suited my situation. You can extend classes as you wish to have your own logic.
 
 Examples:
+```
+// Seconds before a human actually answered the call 
+// (technically, this is number of seconds from first event 
+// to the first BRIDGE_ENTER event, or LINKEDID_END event, 
+// if none BRIDGE_ENTER found):
+echo $call->getTimeBeforeHumanAnswer();
 
-Seconds before a human actually answered the call (technically, this is number of seconds from first event to the first BRIDGE_ENTER event, or LINKEDID_END event, if none BRIDGE_ENTER found):
-
-`echo $call->getTimeBeforeHumanAnswer();`
-
-`$call->isWorkTime()` returns true if the call was inside work hours schedule. See week-based schedule inside MPA_CEL_Call class.
+// returns true if the call was inside work hours schedule. See week-based schedule inside MPA_CEL_Call class:
+var_dump($call->isWorkTime());
