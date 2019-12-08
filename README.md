@@ -1,7 +1,7 @@
 # asterisk-cel-reader
 Class is used to get business-oriented information (reports) over tech-oriented Asterisk CEL events.
 
-Only events stored in databaseare supported, no realtime mode.
+Only events stored in database are supported, no realtime mode.
 
 See cel.php and classes files for examples.
 
