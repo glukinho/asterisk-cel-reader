@@ -9,13 +9,7 @@ class CEL_Call
 	
 	protected $db;
 	protected $table_name;
-	
-		
-	// get($linkedid)
-	
-	// getEvents($eventtype = null)
-	// getFirstEvent($eventtype = null)
-	// getLastEvent($eventtype = null)
+
 	
 	public function __construct($linkedid, $db_options, $table_name = 'cel')
 	{
@@ -31,30 +25,7 @@ class CEL_Call
 		return $this->events;
 	}
 	
-	public function getEventsByType($eventtype = null)
-	{
-		$result = [];
-		
-		if (is_null($eventtype)) return $this->events;
-		
-		foreach ($this->events as $e) {
-			if ( in_array( $e->eventtype, (array)$eventtype ) ) $result[] = $e;
-		}
-		return $result;
-	}
-	
-	public function getFirstEventOfType($eventtype)
-	{
-		$events = $this->getEventsByType($eventtype);
-		return $events[0];
-	}
-	
-	public function getLastEventOfType($eventtype)
-	{
-		$events = $this->getEventsByType($eventtype);
-		return end($events);
-	}
-	
+
 	public function load()
 	{
 		$sql = "SELECT * FROM `{$this->table_name}` WHERE `linkedid`='{$this->linkedid}'";
