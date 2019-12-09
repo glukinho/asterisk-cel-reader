@@ -14,8 +14,8 @@ For example, a user calls to external number. We have channels all assciated wit
 
 | Channel name | Uniqueid | Linkedid | Description |
 | --- | --- | --- | --- |
-| SIP/user | 1234567890.123 | **1234567890.123** | channel from user to Asterisk |
-| SIP/provider | 1234567890.456 | **1234567890.123** | channel from Asterisk to SIP provider |
+| SIP/user-123abc | 1234567890.123 | **1234567890.123** | channel from user to Asterisk |
+| SIP/provider-456def | 1234567890.456 | **1234567890.123** | channel from Asterisk to SIP provider |
 
 ## Basic usage
 As for this class, a call is a set of CEL events associated with one linkedid. CEL_Call class represents one single call. It has many CEL_Event subclasses represented by CEL_Events_Collection class.
