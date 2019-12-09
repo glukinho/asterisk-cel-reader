@@ -10,9 +10,9 @@ See cel.php and classes files for examples.
 ## Asterisk channels and calls
 It is important to understand difference between channel and call, uniqueid and linkedid in Asterisk logic. Many **channels** may take part in one **call**, each having its own **uniqueid** and one **linkedid** shared between all channels:
 
-For example, a user calls to external number. We have channels all assciated with one call with linkedid 1234567890.123:
+For example, a user calls to external number. We have two channels all associated with one call with linkedid 1234567890.123:
 
-| Channel name | Uniqueid | Linkedid | Description |
+| Channel name | Channel uniqueid | Channel (and whole call) linkedid | Description |
 | --- | --- | --- | --- |
 | SIP/user-123abc | 1234567890.123 | **1234567890.123** | channel from user to Asterisk |
 | SIP/provider-456def | 1234567890.456 | **1234567890.123** | channel from Asterisk to SIP provider |
